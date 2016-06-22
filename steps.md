@@ -28,3 +28,16 @@ Create `hot-reload-server.js`.
 
 Add scripts section to `package.json` and add tasks for linting, serving, and building.
 
+# Step 2 - Add Babel for ES2015 and React Support
+
+ES2015 + ES2017 async/await
+
+```
+npm install babel-core babel-loader babel-preset-es2015 babel-plugin-transform-runtime babel-plugin-transform-async-to-generator --save-dev
+npm install babel-runtime --save
+```
+
+Add loader config to `webpack.config.js`.
+
+Update code in `src/index.js` to test both ES2015 and async/await.
+

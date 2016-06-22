@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const staticDir = path.join(__dirname, 'static');
+const srcDir = path.join(__dirname, 'src');
 
 const baseConfig = {
 
@@ -21,7 +22,22 @@ const baseConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         })
-    ]
+    ],
+
+    module: {
+        loaders: [
+            // Use Babel to transpile ES2015 + ES2017 async syntax
+            {
+                test: /\.js$/,
+                loaders: ['babel'],
+                include: srcDir,
+                query: {
+                    presets: ['es2015'],
+                    plugins: ['transform-runtime', 'transform-async-to-generator']
+                }
+            }
+        ]
+    }    
 };
 
 const prodConfig = Object.assign({}, baseConfig, {
