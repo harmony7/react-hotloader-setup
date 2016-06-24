@@ -40,4 +40,12 @@ npm install babel-runtime --save
 Add loader config to `webpack.config.js`.
 
 Update code in `src/index.js` to test both ES2015 and async/await.
+Update code in `.eslintrc.js` to support ES6.
+
+
+React
+
+```
+npm install react react-dom babel-preset-react --save-dev
+```
 

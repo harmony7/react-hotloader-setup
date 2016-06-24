@@ -32,7 +32,7 @@ const baseConfig = {
                 loaders: ['babel'],
                 include: srcDir,
                 query: {
-                    presets: ['es2015'],
+                    presets: ['es2015-native-modules'],
                     plugins: ['transform-runtime', 'transform-async-to-generator']
                 }
             }
@@ -50,27 +50,9 @@ const prodConfig = Object.assign({}, baseConfig, {
 const devConfig = Object.assign({}, baseConfig, {
 
     // Use 'eval' in dev mode, speed up development
-    devtool: 'eval',
+    // devtool: 'eval',
+    devtool: 'inline-source-map'
 
-    entry: [
-        // Automatic Refresh (inline mode)
-        // https://webpack.github.io/docs/webpack-dev-server.html#inline-mode-with-node-js-api
-        'webpack-dev-server/client?http://localhost:8080',
-
-        // Hot Module Replacement entry point
-        // (with manual refreshes - https://github.com/webpack/webpack/issues/418)
-        'webpack/hot/only-dev-server',
-
-        ...baseConfig.entry
-    ],
-
-    plugins: [
-        ...baseConfig.plugins,
-
-        // Hot Module Replacement
-        // https://webpack.github.io/docs/list-of-plugins.html#hotmodulereplacementplugin
-        new webpack.HotModuleReplacementPlugin()
-    ]
 });
 
 module.exports = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
